@@ -12,13 +12,13 @@
 <body>
 
     <nav>
-        <div class="nav-wrapper green darken-1 z-depth-1">
+        <div class="nav-wrapper blue-grey lighten-1 z-depth-1">
             <ul class="left">
                 <li>@Html.ActionLink("Candidates", "Index", "Home", new { area = "Candidate" }, null)</li>
                 <li>@Html.ActionLink("Vacancies", "Index", "Home", new { area = "Vacancy" }, null)</li>
             </ul>
             <ul class="right">
-                <li></li>
+                <li>@Html.ActionLink("Settings", "Index", "Home", new { area = "Settings" }, null)</li>
             </ul>
         </div>
     </nav>

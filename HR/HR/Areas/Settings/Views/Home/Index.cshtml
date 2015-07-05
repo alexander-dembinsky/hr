@@ -1,0 +1,64 @@
+﻿@layout ~/Views/Shared/_Layout.cshtml
+
+@model IEnumerable<InfoType>
+
+@using HR.Models
+
+@helper InfoTypeTable(string title, IEnumerable<InfoType> infoTypes) 
+{
+    if (infoTypes != null && infoTypes.Count() > 0)
+    { 
+    
+        <h4 class="blue-grey-text">@title</h4>
+        <div class="row">
+        @foreach (InfoType type in infoTypes)
+        {
+            <div class="col s4">
+
+                <div class="card z-depth-1-half black-text blue-grey lighten-5">
+                    <div class="card-content black-text">
+                        <div class="card-title black-text">@type.Name</div>
+                        <p>Mask: @(String.IsNullOrEmpty(type.Mask) ? "Empty" : type.Mask)</p>
+                    </div>
+                    <div class="card-action">
+                        @Html.ActionLink("Edit", "EditInfoType", "Home", new { area = "HR.Settings", Id = type.Id })
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    }
+}
+
+
+@functions {
+  IEnumerable<InfoType> InfoTypesOfGroup(Group group)
+  {
+      return (from infoType in ViewData.Model where infoType.Group == @group select infoType);
+  }
+}
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="row">
+             <div class="col s3">
+                 <a class="btn blue-grey lighten-1 waves-effect">Create new</a>
+             </div>
+             <div class="switch right">
+                <label>
+                    Table View
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    Card View
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            @InfoTypeTable("Social Networks", InfoTypesOfGroup(Group.SocialNetworks))
+            @InfoTypeTable("Phone Numbers", InfoTypesOfGroup(Group.PhoneNumbers))
+            @InfoTypeTable("Other", InfoTypesOfGroup(Group.Other))
+        </div>
+    </div>
+</div>
