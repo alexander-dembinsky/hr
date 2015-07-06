@@ -141,8 +141,7 @@
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.ttf" />
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.eot" />
     <Content Include="Areas\Settings\Views\web.config" />
-    <Content Include="Areas\Settings\Views\InfoType\NewInfoType.cshtml" />
-    <Content Include="Areas\Settings\Views\InfoType\InfoTypeForm.cshtml" />
+    <Content Include="Areas\Settings\Views\InfoType\EditInfoType.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

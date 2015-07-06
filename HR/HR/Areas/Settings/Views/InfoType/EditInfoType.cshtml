@@ -1,0 +1,69 @@
+﻿@model HR.Models.InfoType
+
+@using HR.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s6 offset-l3">
+            <h4 class="indigo-text">@ViewBag.Title</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6 offset-l3">
+            @using (Html.BeginForm("SaveInfoType", "InfoType", FormMethod.Post))
+            {
+                <div class="row">
+                    @Html.HiddenFor(_ => _.Id)
+                    <div class="input-field col s9">
+                        @Html.TextBoxFor(_ => _.Name)
+                        @Html.LabelFor(_ => _.Name)
+                        @Html.ValidationMessageFor(_ => _.Name, "", new { @class = "red-text" })
+                    </div>
+                    <div class="input-field col s3">
+                        @Html.CheckBoxFor(_ => _.Active)
+                        @Html.LabelFor(_ => _.Active, "Active")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.TextBoxFor(_ => _.Mask)
+                        @Html.LabelFor(_ => _.Mask)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>
+                            @Html.RadioButtonFor(_ => _.Group, Group.SocialNetworks, new { Id = "SocialNetworks" })
+                            <label for="SocialNetworks">Social Network</label>
+                        </p>
+                        <p>
+                            @Html.RadioButtonFor(_ => _.Group, Group.PhoneNumbers, new { Id = "PhoneNumbers" })
+                            <label for="PhoneNumbers">Phone Number</label>
+                        </p>
+                        <p>
+                            @Html.RadioButtonFor(_ => _.Group, Group.Other, new { Id = "Other" })
+                            <label for="Other">Other</label>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button class="btn green">Save</button>
+                        <input type="reset" class="btn indigo" value="Reset" />
+                        <a href="@Url.Action("Index", "InfoType", new { area = "Settings" })" class="btn indigo">Back</a>
+                    </div>
+                </div>
+
+            }
+
+        </div>  
+    </div>
+
+</div>
+

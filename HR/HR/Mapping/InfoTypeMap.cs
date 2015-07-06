@@ -15,6 +15,7 @@ namespace HR.Mapping
             Id(_ => _.Id);
             Map(_ => _.Name);
             Map(_ => _.Mask);
+            Map(_ => _.Active);
             Map(_ => _.Group, "[Group]").CustomType<Group>();
             References(_ => _.Image).Column("ImageId");
         }

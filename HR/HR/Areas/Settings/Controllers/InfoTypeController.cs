@@ -32,14 +32,68 @@ namespace HR.Areas.Settings.Controllers
             return View(infoTypes);
         }
 
-        public ActionResult NewInfoType()
+        public ActionResult EditInfoType(Guid id)
         {
-            return View();
+            if (id == Guid.Empty)
+            {
+                ViewBag.Title = "New Info Type";
+                return View(new InfoType() { Active = true });
+            } 
+            else
+            {
+                InfoType infoType = null;
+                using (var session = sessionFactory.OpenSession())
+                {
+                    infoType = session.Get<InfoType>(id);
+                }    
+                 
+                if (infoType == null)
+                {
+                   return new HttpNotFoundResult(string.Format("InfoType with id = {0} was not found in database", id));
+                }
+
+                ViewBag.Title = infoType.Name;
+                return View(infoType);
+            }
         }
 
-        public ActionResult InfoTypeForm(InfoType infoType)
+        public ActionResult SaveInfoType(InfoType infoType)
         {
-            return PartialView(infoType);
+            if (ModelState.IsValid)
+            {
+                using (var session = sessionFactory.OpenSession())
+                {
+                    session.BeginTransaction();
+                    session.SaveOrUpdate(infoType);
+                    session.Transaction.Commit();
+                }
+                return Redirect("Index");
+            }
+            else
+            {
+                return View("EditinfoType", infoType);
+            }
+            
+        }
+
+        public JsonResult ValidateInfoTypeName(string name, Guid id)
+        {
+            bool exists = false;
+            using (var session = sessionFactory.OpenSession())
+            {
+                exists = session.Query<InfoType>().Any(_ => _.Name.Like(name) && _.Id != id);
+            }
+
+            if (!exists)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("This name is already taken.", JsonRequestBehavior.AllowGet);
+            }
+
+            
         }
     }
 }
