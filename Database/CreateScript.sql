@@ -7,12 +7,23 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[InfoType](
+CREATE TABLE [dbo].[Images]
+(
+    [Id] [uniqueidentifier] NOT NULL,
+	Content image NOT NULL,
+	PRIMARY KEY ([Id])
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
+
+CREATE TABLE [dbo].[InfoType]
+(
 	[Id] [uniqueidentifier] NOT NULL,
 	[Name] [text] NOT NULL,
 	[Mask] [text] NULL,
 	[Group] [int] NOT NULL,
+	ImageId [uniqueidentifier],
+	Active tinyint DEFAULT 1 NOT NULL,
 	PRIMARY KEY([Id]),
+	CONSTRAINT InfoType_Image_FK FOREIGN KEY (ImageId) REFERENCES [dbo].[Images](Id)
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO

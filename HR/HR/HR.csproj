@@ -141,6 +141,8 @@
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.ttf" />
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.eot" />
     <Content Include="Areas\Settings\Views\web.config" />
+    <Content Include="Areas\Settings\Views\InfoType\NewInfoType.cshtml" />
+    <Content Include="Areas\Settings\Views\InfoType\InfoTypeForm.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -155,14 +157,13 @@
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Settings\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\InfoType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Candidate\CandidateAreaRegistration.cs" />
-    <Compile Include="Areas\Settings\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Settings\Controllers\InfoTypeController.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,8 +171,10 @@
     </Compile>
     <Compile Include="Infrastructure\HibernateUtil.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Mapping\ImageMap.cs" />
     <Compile Include="Mapping\InfoTypeMap.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\InfoType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

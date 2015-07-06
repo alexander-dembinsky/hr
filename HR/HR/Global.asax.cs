@@ -17,7 +17,6 @@ namespace HR
     {
         void Application_Start(object sender, EventArgs e)
         {
-            // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -32,6 +31,7 @@ namespace HR
         IKernel PrepareKernel()
         {
             IKernel kernel = new StandardKernel();
+            kernel.Unbind<ModelValidatorProvider>();
 
             // Common
             kernel.Bind<ISessionFactory>().ToMethod((_) => HibernateUtil.GetSessionFactory());
@@ -40,7 +40,7 @@ namespace HR
             kernel.Bind<HR.Controllers.HomeController>().ToSelf();
 
             // Settings
-            kernel.Bind<HR.Areas.Settings.Controllers.HomeController>().ToSelf();
+            kernel.Bind<HR.Areas.Settings.Controllers.InfoTypeController>().ToSelf();
 
             return kernel;
         }

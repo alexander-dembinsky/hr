@@ -1,0 +1,23 @@
+﻿@model HR.Models.InfoType
+
+@using HR.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s6 offset-l3">
+            <h4 class="indigo-text">New Info Type</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6 offset-l3">
+            @Html.Partial("InfoTypeForm", new InfoType { Active = true })
+        </div>  
+    </div>
+
+</div>
+

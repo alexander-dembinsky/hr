@@ -10,12 +10,12 @@ using System.Web.Mvc;
 
 namespace HR.Areas.Settings.Controllers
 {
-    public class HomeController : Controller
+    public class InfoTypeController : Controller
     {
         readonly ISessionFactory sessionFactory;
 
         [Inject]
-        public HomeController(ISessionFactory sessionFactory)
+        public InfoTypeController(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
         }
@@ -30,6 +30,16 @@ namespace HR.Areas.Settings.Controllers
             }
 
             return View(infoTypes);
+        }
+
+        public ActionResult NewInfoType()
+        {
+            return View();
+        }
+
+        public ActionResult InfoTypeForm(InfoType infoType)
+        {
+            return PartialView(infoType);
         }
     }
 }
