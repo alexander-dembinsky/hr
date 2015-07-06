@@ -4,22 +4,63 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR</title>
+
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Scripts/materialize/materialize.min.js"></script>
+
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/materialize/css/materialize.min.css" rel="stylesheet" type="text/css" />
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
+    <ul id="settings-dropdown" class="dropdown-content blue-text">
+        <li>@Html.ActionLink("Info Types", "Index", "InfoType", new { area = "Settings" }, null)</li>
+        <li>@Html.ActionLink("Users", "Index", "User", new { area = "Settings" }, null)</li>
+    </ul>
+
     <nav>
-        <div class="nav-wrapper blue-grey lighten-1 z-depth-1">
+        <div class="nav-wrapper indigo lighten-1 z-depth-1">
             <ul class="left">
-                <li>@Html.ActionLink("Candidates", "Index", "Home", new { area = "Candidate" }, null)</li>
-                <li>@Html.ActionLink("Vacancies", "Index", "Home", new { area = "Vacancy" }, null)</li>
+                <li><a href="@Url.Action("Index", "Home", new { area = "" })"><i class="material-icons left">home</i>Home</a></li>
+                <li>
+                    <a href="@Url.Action("Index", "Home", new { area = "Candidate" })">
+                        <i class="material-icons left">contacts</i>Candidates
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Home", new { area = "Vacancy" })">
+                        <i class="material-icons left">description</i>Vacancies
+                    </a>
+                </li>
             </ul>
             <ul class="right">
-                <li>@Html.ActionLink("Settings", "Index", "Home", new { area = "Settings" }, null)</li>
+                <li>
+                    <form>
+                        <div class="input-field indigo lighten-2 hide-on-med-and-down">
+                            <input id="search" type="search" required>
+                            <label for="search"><i class="material-icons">search</i></label>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <a class="dropdown-button" href="#!" data-activates="settings-dropdown">
+                      <i class="material-icons left">settings</i>
+                        Settings
+                      <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons left">settings_power</i>Logout
+                    </a>
+                </li>
             </ul>
+            
         </div>
     </nav>
     
@@ -27,7 +68,6 @@
     @RenderBody()
     
 
-    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
-    <script src="~/Scripts/materialize/materialize.min.js"></script>
+    
 </body>
 </html>
