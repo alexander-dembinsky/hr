@@ -24,49 +24,62 @@
 </head>
 <body>
 
-    <ul id="settings-dropdown" class="dropdown-content blue-text">
+    <ul id="settings-dropdown" class="dropdown-content">
         <li>@Html.ActionLink("Info Types", "Index", "InfoType", new { area = "Settings" }, null)</li>
         <li>@Html.ActionLink("Users", "Index", "User", new { area = "Settings" }, null)</li>
     </ul>
 
+    <ul id="actions-dropdown" class="dropdown-content">
+        <li><h6>Settings</h6></li>
+        <li>@Html.ActionLink("Info Types", "Index", "InfoType", new { area = "Settings" }, null)</li>
+        <li>@Html.ActionLink("Users", "Index", "User", new { area = "Settings" }, null)</li>
+        <li><h6>Account</h6></li>
+        <li><a href="#">Logout</a></li>
+    </ul>
+
     <nav>
-        <div class="nav-wrapper indigo lighten-1 z-depth-1">
+        <div class="nav-wrapper indigo lighten-1">
             <ul class="left">
-                <li><a href="@Url.Action("Index", "Home", new { area = "" })"><i class="material-icons left">home</i>Home</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { area = "" })"><i class="material-icons left">home</i><span class="hide-on-med-and-down">Home</span></a></li>
                 <li>
                     <a href="@Url.Action("Index", "Home", new { area = "Candidate" })">
-                        <i class="material-icons left">contacts</i>Candidates
+                        <i class="material-icons left">contacts</i><span class="hide-on-med-and-down">Candidates</span>
                     </a>
                 </li>
                 <li>
                     <a href="@Url.Action("Index", "Home", new { area = "Vacancy" })">
-                        <i class="material-icons left">description</i>Vacancies
+                        <i class="material-icons left">description</i><span class="hide-on-med-and-down">Vacancies</span>
                     </a>
                 </li>
             </ul>
             <ul class="right">
-                <li>
+                <li class="hide-on-med-and-down">
                     <form>
-                        <div class="input-field indigo lighten-2 hide-on-med-and-down">
+                        <div class="input-field indigo lighten-2">
                             <input id="search" type="search" required>
                             <label for="search"><i class="material-icons">search</i></label>
                         </div>
                     </form>
                 </li>
-                <li>
+                <li class="hide-on-med-and-down">
                     <a class="dropdown-button" href="#!" data-activates="settings-dropdown">
-                      <i class="material-icons left">settings</i>
+                        <i class="material-icons left">settings</i>
                         Settings
-                      <i class="material-icons right">arrow_drop_down</i>
+                        <i class="material-icons right">arrow_drop_down</i>
                     </a>
                 </li>
-                <li>
+                <li class="hide-on-med-and-down">
                     <a href="#">
-                        <i class="material-icons left">settings_power</i>Logout
+                        <i class="material-icons left">settings_power</i><span class="hide-on-med-and-down">Logout</span>
                     </a>
+                </li>
+                <li class="hide-on-large-only">
+                    <a href="#" class="dropdown-button" data-activates="actions-dropdown"><i class="material-icons">more_vert</i></a>
                 </li>
             </ul>
-            
+
+
+
         </div>
     </nav>
     
