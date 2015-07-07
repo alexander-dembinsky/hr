@@ -11,6 +11,9 @@ CREATE TABLE [dbo].[Images]
 (
     [Id] [uniqueidentifier] NOT NULL,
 	Content image NOT NULL,
+	ContentType text NOT NULL,
+	ContentLength bigint not null,
+	[FileName] text not null,
 	PRIMARY KEY ([Id])
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 
@@ -30,8 +33,8 @@ GO
 
 insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'Work Phone', NULL, 1);
 insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'Home Phone', NULL, 1);
-insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'Google+', NULL, 0);
-insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'VK', '(http|https)://vk.com/[a-zA-Z0-9]+', 0);
+insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'Google+', NULL,0);
+insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'VK', NULL, 0);
 insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'Facebook', NULL, 0);
 insert into [dbo].[InfoType] (Id,Name, Mask, [Group]) values (NEWID(),'LinkedIn', NULL, 0);
 

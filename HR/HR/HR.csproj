@@ -168,6 +168,7 @@
     <Compile Include="Areas\Settings\Controllers\InfoTypeController.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

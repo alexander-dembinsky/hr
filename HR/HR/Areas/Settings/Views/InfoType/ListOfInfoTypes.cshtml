@@ -14,8 +14,9 @@
             <h5 class="indigo-text">@title</h5>
             @foreach (InfoType type in infoTypes)
             {
-                <p>
-                    <a class="@(type.Active ? "blue-text" : "grey-text")" href=" @Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id }) ">@type.Name</a>
+                <p class="valign-wrapper">
+                    <img style="min-width: 32px; min-height: 32px; max-height: 32px; max-width: 32px; margin-right: 5px" src="@(type.Image != null ? string.Format("/api/Image/{0}", type.Image.Id) : "")" alt="" class="valign" />
+                    <a class="valign @(type.Active ? "blue-text" : "grey-text")" href=" @Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id }) ">@type.Name</a>
                 </p>
             }
         </div>

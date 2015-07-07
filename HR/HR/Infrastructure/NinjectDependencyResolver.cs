@@ -25,6 +25,5 @@ namespace HR.Infrastructure
         {
             return kernel.GetAll(serviceType);
         }
-
     }
 }

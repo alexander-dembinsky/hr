@@ -9,5 +9,8 @@ namespace HR.Models
     {
         public virtual Guid Id { get; set; }
         public virtual byte[] Content { get; set; }
+        public virtual string ContentType { get; set; }
+        public virtual string FileName { get; set; }
+        public virtual long ContentLength { get; set; }
     }
 }

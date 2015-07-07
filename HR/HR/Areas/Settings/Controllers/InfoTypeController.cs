@@ -63,6 +63,7 @@ namespace HR.Areas.Settings.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult SaveInfoType(InfoType infoType)
         {
             if (ModelState.IsValid)
@@ -70,6 +71,27 @@ namespace HR.Areas.Settings.Controllers
                 using (var session = sessionFactory.OpenSession())
                 {
                     session.BeginTransaction();
+
+                    if (Request.Files.Count > 0)
+                    {
+                        var iconFile = Request.Files[0];
+
+                        byte[] buffer = new byte[iconFile.ContentLength];
+                        iconFile.InputStream.Read(buffer, 0, iconFile.ContentLength);
+
+                        Image image = new Image()
+                        {
+                            Content = buffer,
+                            ContentLength = iconFile.ContentLength,
+                            ContentType = iconFile.ContentType,
+                            FileName = iconFile.FileName
+                        };
+
+                        session.SaveOrUpdate(image);
+                        infoType.Image = image;
+                    }
+
+                    
                     session.SaveOrUpdate(infoType);
                     session.Transaction.Commit();
                 }

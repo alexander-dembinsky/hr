@@ -18,10 +18,12 @@ namespace HR
         void Application_Start(object sender, EventArgs e)
         {
             AreaRegistration.RegisterAllAreas();
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(PrepareKernel()));
+            var dependencyResolver = new NinjectDependencyResolver(PrepareKernel());
+            DependencyResolver.SetResolver(dependencyResolver);
         }
 
         /// <summary>
@@ -36,8 +38,9 @@ namespace HR
             // Common
             kernel.Bind<ISessionFactory>().ToMethod((_) => HibernateUtil.GetSessionFactory());
             
-            // Main Screen
+            // Common
             kernel.Bind<HR.Controllers.HomeController>().ToSelf();
+            kernel.Bind<HR.Controllers.ImageController>().ToSelf();
 
             // Settings
             kernel.Bind<HR.Areas.Settings.Controllers.InfoTypeController>().ToSelf();

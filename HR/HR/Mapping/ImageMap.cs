@@ -14,6 +14,9 @@ namespace HR.Mapping
             Table("Images");
             Id(_ => _.Id);
             Map(_ => _.Content);
+            Map(_ => _.ContentLength);
+            Map(_ => _.ContentType);
+            Map(_ => _.FileName);
         }
     }
 }
