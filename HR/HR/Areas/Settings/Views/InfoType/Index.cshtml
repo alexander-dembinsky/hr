@@ -3,45 +3,16 @@
 @model IEnumerable<InfoType>
 
 @using HR.Models
-
-@helper InfoTypeTable(string title, IEnumerable<InfoType> infoTypes) 
-{
-    if (infoTypes != null && infoTypes.Count() > 0)
-    {
-        <ul class="collection with-header">
-            <li class="collection-header indigo-text"><h4>@title</h4></li>
-            @foreach (InfoType type in infoTypes)
-            {
-                <li class="collection-item">
-                    <div>
-                        @type.Name
-                        <a href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id })" class="secondary-content indigo-text"><i class="material-icons">edit</i></a>
-                    </div>
-                 </li>
-            }
-        </ul>
-
-    }
-}
-
-@functions {
-    IEnumerable<InfoType> InfoTypesOfGroup(Group group)
-    {
-        return (from infoType in ViewData.Model where infoType.Group == @group select infoType);
-    }
-}
 <br />
 <div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col s3">
-                <a class="btn indigo lighten-1 waves-effect" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = Guid.Empty })">Create new</a>
-            </div>
-        </div>
-        <div class="row">
-            @InfoTypeTable("Social Networks", InfoTypesOfGroup(Group.SocialNetworks))
-            @InfoTypeTable("Phone Numbers", InfoTypesOfGroup(Group.PhoneNumbers))
-            @InfoTypeTable("Other", InfoTypesOfGroup(Group.Other))
-        </div>
-    </div>
+     <div class="row">
+         <div class="col s4">
+             <a class="btn indigo lighten-1 waves-effect" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = Guid.Empty })">Create</a>
+         </div>
+     </div>
+     <div class="row">
+         <div class="col s4">
+             @Html.Partial("ListOfInfoTypes")
+         </div>
+     </div>
 </div>

@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<InfoType>
+
+@using HR.Models
+
+@helper InfoTypeTable(string title, IEnumerable<InfoType> infoTypes)
+{
+    if (infoTypes != null && infoTypes.Count() > 0)
+    {
+        <div class="section">
+            <h5 class="indigo-text">@title</h5>
+            @foreach (InfoType type in infoTypes)
+            {
+                <p>
+                    <a class="@(type.Active ? "blue-text" : "grey-text")" href=" @Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id }) ">@type.Name</a>
+                </p>
+            }
+        </div>
+    }
+}
+
+
+@functions {
+    IEnumerable<InfoType> InfoTypesOfGroup(Group group)
+    {
+        return (from infoType in ViewData.Model where infoType.Group == @group select infoType);
+    }
+}
+
+
+@InfoTypeTable("Social Networks", InfoTypesOfGroup(Group.SocialNetworks))
+@InfoTypeTable("Phone Numbers", InfoTypesOfGroup(Group.PhoneNumbers))
+@InfoTypeTable("Other", InfoTypesOfGroup(Group.Other))
+
+

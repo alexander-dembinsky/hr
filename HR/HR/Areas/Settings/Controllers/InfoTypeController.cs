@@ -20,7 +20,7 @@ namespace HR.Areas.Settings.Controllers
             this.sessionFactory = sessionFactory;
         }
 
-        public ActionResult Index()
+        private List<InfoType> GetAllInfoTypes()
         {
             List<InfoType> infoTypes = null;
 
@@ -28,12 +28,18 @@ namespace HR.Areas.Settings.Controllers
             {
                 infoTypes = (from infoType in session.Query<InfoType>() select infoType).ToList();
             }
+            return infoTypes;
+        }
 
+        public ActionResult Index()
+        {
+            var infoTypes = GetAllInfoTypes();
             return View(infoTypes);
         }
 
         public ActionResult EditInfoType(Guid id)
         {
+            ViewBag.InfoTypes = GetAllInfoTypes();
             if (id == Guid.Empty)
             {
                 ViewBag.Title = "New Info Type";
@@ -92,8 +98,7 @@ namespace HR.Areas.Settings.Controllers
             {
                 return Json("This name is already taken.", JsonRequestBehavior.AllowGet);
             }
-
-            
         }
+        
     }
 }

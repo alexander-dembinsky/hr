@@ -7,16 +7,18 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<br />
 <div class="container">
     <div class="row">
-        <div class="col s6 offset-l3">
-            <h4 class="indigo-text">@ViewBag.Title</h4>
+        <div class="col s4">
+            <a class="btn indigo lighten-1 waves-effect" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = Guid.Empty })">Create</a>
         </div>
     </div>
-
     <div class="row">
-        <div class="col s6 offset-l3">
+        <div class="col s4">
+            @Html.Partial("ListOfInfoTypes", ViewBag.InfoTypes as IEnumerable<InfoType>)
+        </div>
+        <div class="col s8">
             @using (Html.BeginForm("SaveInfoType", "InfoType", FormMethod.Post))
             {
                 <div class="row">
@@ -56,14 +58,10 @@
                 <div class="row">
                     <div class="col">
                         <button class="btn green">Save</button>
-                        <a href="@Url.Action("Index", "InfoType", new { area = "Settings" })" class="btn indigo">Cancel</a>
                     </div>
                 </div>
 
             }
-
-        </div>  
+        </div>
     </div>
-
 </div>
-
