@@ -69,31 +69,40 @@ namespace HR.Areas.Settings.Controllers
             if (ModelState.IsValid)
             {
                 using (var session = sessionFactory.OpenSession())
+                using (var tx = session.BeginTransaction())
                 {
-                    session.BeginTransaction();
+                    if (infoType.Id != Guid.Empty)
+                    {
+                        infoType = session.Get<InfoType>(infoType.Id);
+                    }
+                    else
+                    {
+                        session.SaveOrUpdate(infoType);
+                    }
 
                     if (Request.Files.Count > 0)
                     {
                         var iconFile = Request.Files[0];
 
-                        byte[] buffer = new byte[iconFile.ContentLength];
-                        iconFile.InputStream.Read(buffer, 0, iconFile.ContentLength);
-
-                        Image image = new Image()
+                        if (iconFile.ContentLength > 0)
                         {
-                            Content = buffer,
-                            ContentLength = iconFile.ContentLength,
-                            ContentType = iconFile.ContentType,
-                            FileName = iconFile.FileName
-                        };
+                            byte[] buffer = new byte[iconFile.ContentLength];
+                            iconFile.InputStream.Read(buffer, 0, iconFile.ContentLength);
 
-                        session.SaveOrUpdate(image);
-                        infoType.Image = image;
+                            Image image = new Image()
+                            {
+                                Content = buffer,
+                                ContentLength = iconFile.ContentLength,
+                                ContentType = iconFile.ContentType,
+                                FileName = iconFile.FileName
+                            };
+
+                            session.SaveOrUpdate(image);
+                            infoType.Image = image;
+                        }
                     }
 
-                    
-                    session.SaveOrUpdate(infoType);
-                    session.Transaction.Commit();
+                    tx.Commit();
                 }
                 return Redirect("Index");
             }

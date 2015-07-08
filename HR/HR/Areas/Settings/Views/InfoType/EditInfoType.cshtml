@@ -23,12 +23,12 @@
             {
                 <div class="row">
                     @Html.HiddenFor(_ => _.Id)
-                    <div class="input-field col s8">
+                    <div class="input-field col l8">
                         @Html.TextBoxFor(_ => _.Name)
                         @Html.LabelFor(_ => _.Name)
                         @Html.ValidationMessageFor(_ => _.Name, "", new { @class = "red-text" })
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col l4">
                         @Html.MaterializeSwitch(_ => _.Active, "Inactive", "Active")
                     </div>
                 </div>
@@ -39,12 +39,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="file-field input-field col s12">
+                    <div class="file-field input-field col l9">
                         <input class="file-path validate" type="text" />
                         <div class="btn">
                             <span>Icon</span>
                             <input type="file" name="InfoTypeIcon" />
                         </div>
+                    </div>
+                    <div class="col l9">
+
                     </div>
                 </div>
                 <div class="row">
