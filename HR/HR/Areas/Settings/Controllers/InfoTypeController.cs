@@ -18,6 +18,7 @@ namespace HR.Areas.Settings.Controllers
         public InfoTypeController(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
+            ViewBag.Title = "Settings > Info Types";
         }
 
         private List<InfoType> GetAllInfoTypes()
