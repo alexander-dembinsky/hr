@@ -10,16 +10,13 @@
 {
     if (infoTypes != null && infoTypes.Count() > 0)
     {
-        <div class="section l4 m12 s12">
-            <h5 class="indigo-text">@title</h5>
+        <ul class="collection with-header l4 m12 s12">
+            <li class="collection-header">@title</li>
             @foreach (InfoType type in infoTypes)
             {
-                <p class="valign-wrapper">
-                    <img class="info-type-icon" src="@(type.Image != null ? string.Format("/api/Image/{0}", type.Image.Id) : "")" alt="" class="valign" />
-                    <a class="valign @(type.Active ? "blue-text" : "grey-text")" href=" @Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id }) ">@type.Name</a>
-                </p>
+                <a class="collection-item waves-effect waves-ripple @(type.Active ? "indigo-text" : "grey-text")" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id })">@type.Name</a>
             }
-        </div>
+        </ul>
     }
 }
 

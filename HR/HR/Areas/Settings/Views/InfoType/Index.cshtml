@@ -5,13 +5,15 @@
 @using HR.Models
 <br />
 <div class="container">
+     
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large indigo waves-effect" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = Guid.Empty })">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+
      <div class="row">
-         <div class="col s4">
-             <a class="btn indigo lighten-1 waves-effect" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = Guid.Empty })">Create</a>
-         </div>
-     </div>
-     <div class="row">
-         <div class="col s4">
+         <div class="col l12 m12 s12">
              @Html.Partial("ListOfInfoTypes")
          </div>
      </div>

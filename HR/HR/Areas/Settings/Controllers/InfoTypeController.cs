@@ -42,7 +42,6 @@ namespace HR.Areas.Settings.Controllers
             ViewBag.InfoTypes = GetAllInfoTypes();
             if (id == Guid.Empty)
             {
-                ViewBag.Title = "New Info Type";
                 return View(new InfoType() { Active = true });
             } 
             else
@@ -58,7 +57,6 @@ namespace HR.Areas.Settings.Controllers
                    return new HttpNotFoundResult(string.Format("InfoType with id = {0} was not found in database", id));
                 }
 
-                ViewBag.Title = infoType.Name;
                 return View(infoType);
             }
         }
@@ -71,37 +69,7 @@ namespace HR.Areas.Settings.Controllers
                 using (var session = sessionFactory.OpenSession())
                 using (var tx = session.BeginTransaction())
                 {
-                    if (infoType.Id != Guid.Empty)
-                    {
-                        infoType = session.Get<InfoType>(infoType.Id);
-                    }
-                    else
-                    {
-                        session.SaveOrUpdate(infoType);
-                    }
-
-                    if (Request.Files.Count > 0)
-                    {
-                        var iconFile = Request.Files[0];
-
-                        if (iconFile.ContentLength > 0)
-                        {
-                            byte[] buffer = new byte[iconFile.ContentLength];
-                            iconFile.InputStream.Read(buffer, 0, iconFile.ContentLength);
-
-                            Image image = new Image()
-                            {
-                                Content = buffer,
-                                ContentLength = iconFile.ContentLength,
-                                ContentType = iconFile.ContentType,
-                                FileName = iconFile.FileName
-                            };
-
-                            session.SaveOrUpdate(image);
-                            infoType.Image = image;
-                        }
-                    }
-
+                    session.SaveOrUpdate(infoType);
                     tx.Commit();
                 }
                 return Redirect("Index");
