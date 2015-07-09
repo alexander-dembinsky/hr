@@ -2,10 +2,14 @@
     background-color: #fdfdfd;
 }
 
-.info-type-icon {
-    min-width: 32px; 
-    min-height: 32px; 
-    max-height: 32px; 
-    max-width: 32px; 
-    margin-right: 5px
+#slide-out > li > a {
+    font-weight: bold;
+}
+
+#slide-out .collapsible-header {
+    font-weight: bold;
+}
+
+.search-bar {
+    margin-left: 20px;
 }
