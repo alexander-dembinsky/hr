@@ -14,7 +14,7 @@
             <li class="collection-header">@title</li>
             @foreach (InfoType type in infoTypes)
             {
-                <a class="collection-item waves-effect waves-ripple @(type.Active ? "indigo-text" : "grey-text")" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id })">@type.Name</a>
+                <a class="collection-item @(type.Active ? "indigo-text" : "grey-text")" href="@Url.Action("EditInfoType", "InfoType", new { area = "Settings", Id = type.Id })">@type.Name</a>
             }
         </ul>
     }

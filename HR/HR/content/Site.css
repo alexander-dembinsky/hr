@@ -10,6 +10,12 @@
     font-weight: bold;
 }
 
-.search-bar {
-    margin-left: 20px;
+.slide-menu-item {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+}
+
+.slide-menu-item .material-icons {
+    margin-right: 18px;
 }

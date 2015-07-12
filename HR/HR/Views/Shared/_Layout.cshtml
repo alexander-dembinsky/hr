@@ -30,30 +30,26 @@
                 <ul class="left">
                     <li><a href="#" data-activates="slide-out" class="button-slide-menu"><i class="mdi-navigation-menu"></i></a></li>
                     <li>@ViewBag.Title</li>
-                    <li class="search-bar">
-                        <div class="input-field">
-                            <input type="search" id="search"/>
-                            <label for="search"><i class="material-icons">search</i></label>
-                        </div>
-                    </li>
                 </ul>
-                
-                
+                <ul class="right">
+                    <li><a href="#" id="search-button"><i class="material-icons">search</i></a></li>
+                </ul>
             </div>
             <ul id="slide-out" class="side-nav">
                 <li class="logo indigo-text">
-                    <h3>HR menu</h3>
+                    <h3>HR</h3>
                 </li>
-                <li><a href="#!">Candidates</a></li>
-                <li><a href="#!">Vacancies</a></li>
+                <li class="divider"></li>
+                <li><a href="#!" class="slide-menu-item"><i class="material-icons">face</i><span>Candidates</span></a></li>
+                <li><a href="#!" class="slide-menu-item"><i class="material-icons">work</i><span>Vacancies</span></a></li>
                 <li class="no-padding">
                     <ul class="collapsible">
                         <li>
-                            <a class="collapsible-header">Settings</a>
+                            <a class="collapsible-header slide-menu-item"><i class="material-icons">settings</i><span>Settings</span></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="@Url.Action("Index", "InfoType", new { area = "Settings" })">Info Types</a></li>
-                                    <li><a href="#!">Users</a></li>
+                                    <li><a href="@Url.Action("Index", "InfoType", new { area = "Settings" })" class="slide-menu-item"><i class="material-icons">contacts</i><span>Info Types</span></a></li>
+                                    <li><a href="#!" class="slide-menu-item"><i class="material-icons">perm_identity</i><span>Users</span></a></li>
                                 </ul>
                             </div>
                         </li>
@@ -61,10 +57,23 @@
                 </li>
 
             </ul>
-
         </nav>
      </div>
-
+    <div class="container" id="search-bar">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s11 l11">
+                        <i class="material-icons prefix" id="search-clear-button">close</i>
+                        <input id="search-input" type="search" class="validate">
+                        <label for="search-input">Search</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="divider"></div>
+     
         @RenderBody()
 
 
