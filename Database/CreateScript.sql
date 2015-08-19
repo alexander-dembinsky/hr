@@ -1,4 +1,4 @@
-USE [HR]
+﻿USE [HR]
 GO
 
 SET ANSI_NULLS ON
@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[InfoType]
 	[Mask] [text] NULL,
 	[Group] [int] NOT NULL,
 	ImageId [uniqueidentifier],
-	Active tinyint DEFAULT 1 NOT NULL,
+	Active bit DEFAULT 1 NOT NULL,
 	PRIMARY KEY([Id]),
 	CONSTRAINT InfoType_Image_FK FOREIGN KEY (ImageId) REFERENCES [dbo].[Images](Id)
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]

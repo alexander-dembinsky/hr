@@ -8,8 +8,11 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
 using HR.Infrastructure;
-using Ninject;
-using NHibernate;
+using Autofac;
+using HR.Infrastructure.Repository;
+using Autofac.Integration.Mvc;
+using HR.Controllers;
+using HR.Areas.Settings.Controllers;
 
 namespace HR
 {
@@ -17,35 +20,10 @@ namespace HR
     {
         void Application_Start(object sender, EventArgs e)
         {
+            AutofacConfig.ConfigureContainer();
             AreaRegistration.RegisterAllAreas();
-
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            var dependencyResolver = new NinjectDependencyResolver(PrepareKernel());
-            DependencyResolver.SetResolver(dependencyResolver);
-        }
-
-        /// <summary>
-        /// Dependency injection configuration.
-        /// </summary>
-        /// <returns>NInject kernel</returns>
-        IKernel PrepareKernel()
-        {
-            IKernel kernel = new StandardKernel();
-            kernel.Unbind<ModelValidatorProvider>();
-
-            // Common
-            kernel.Bind<ISessionFactory>().ToMethod((_) => HibernateUtil.GetSessionFactory());
-            
-            // Common
-            kernel.Bind<HR.Controllers.HomeController>().ToSelf();
-            kernel.Bind<HR.Controllers.ImageController>().ToSelf();
-
-            // Settings
-            kernel.Bind<HR.Areas.Settings.Controllers.InfoTypeController>().ToSelf();
-
-            return kernel;
         }
     }
 }

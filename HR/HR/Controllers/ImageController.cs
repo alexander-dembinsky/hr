@@ -1,7 +1,6 @@
 ﻿using HR.Infrastructure;
+using HR.Infrastructure.Repository;
 using HR.Models;
-using NHibernate;
-using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,25 +12,27 @@ namespace HR.Controllers
 {
     public class ImageController : ApiController
     {
+        private IHRRepository repository;
+
+        public ImageController(IHRRepository repository)
+        {
+            this.repository = repository;
+        }
+
         public HttpResponseMessage GetImage(Guid id)
         {
-            ISessionFactory sessionFactory = HibernateUtil.GetSessionFactory();
-
-            using (var session = sessionFactory.OpenSession())
+            Image image = repository.GetAllImage.Where(_ => _.Id == id).FirstOrDefault();
+            if (image == null)
             {
-                Image image = session.Get<Image>(id);
-                if (image == null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                }
-                var response = Request.CreateResponse(HttpStatusCode.OK);
-                
-                response.Content = new ByteArrayContent(image.Content);
-                response.Content.Headers.Add("Content-Length", image.ContentLength.ToString());
-                response.Content.Headers.Add("Content-Type", image.ContentType.ToString());
-
-                return response;
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+
+            response.Content = new ByteArrayContent(image.Content);
+            response.Content.Headers.Add("Content-Length", image.ContentLength.ToString());
+            response.Content.Headers.Add("Content-Type", image.ContentType.ToString());
+
+            return response;
         }
     }
 }
