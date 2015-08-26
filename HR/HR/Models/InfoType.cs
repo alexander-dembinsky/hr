@@ -1,29 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace HR.Models
 {
+    [Table("InfoType")]
     public class InfoType
     {
-        public virtual Guid Id { get; set; }
+        [Column(TypeName = "uniqueidentifier")]
+        [Required]
+        public Guid Id { get; set; }
 
         [Remote("ValidateInfoTypeName", "InfoType", "Settings", AdditionalFields = "Id")]
         [Required(ErrorMessage = "Name is required")]
         [Display(Name = "Name")]
-        public virtual string Name { get; set; }
+        [Column(TypeName = "text")]
+        public string Name { get; set; }
 
         [Display(Name = "Mask")]
-        public virtual string Mask { get; set; }
+        [Column(TypeName = "text")]
+        public string Mask { get; set; }
 
         [Required]
-        public virtual Group Group { get; set; }
+        [Column(TypeName = "int")]
+        public Group Group { get; set; }
 
-        public virtual bool Active { get; set; }
+        public bool Active { get; set; }
 
         public virtual Image Image { get; set; }
+
+        public Guid? ImageId { get; set; }
     }
 }
